@@ -5,6 +5,7 @@ import org.testng.annotations.Test;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
@@ -20,8 +21,14 @@ public class topic_03_Xpath_EX {
 		WebDriver driver;
 		String firstname = "automation";
 		String lastname = "testing";
-		String validEmail = "automation_13@gmail.com";
+		String validEmail = "automation" + randomNumber()+"@gmail.com";
 		String validPassword = "123123";
+		
+		public int randomNumber() {
+			Random rand= new Random();
+			int n =rand.nextInt(50);
+			return n;
+	}
 
 		@BeforeClass
 
@@ -92,12 +99,37 @@ public class topic_03_Xpath_EX {
 			String errorMsg= driver.findElement(By.xpath("//li[@class='error-msg']//span")).getText();
 			Assert.assertEquals(errorMsg ,"Invalid login or password.");
 		
-		}
+		}	
+
+		@Test
+
+		public void TC_05_CreateNewAccount() {
+			driver.get("http://live.demoguru99.com/");
+			driver.findElement(By.xpath("//div[@class='footer']//a[text()='My Account']")).click();
+			driver.findElement(By.xpath("//span[(text()='Create an Account')]")).click();
+			driver.findElement(By.xpath("//input[@id='firstname']")).sendKeys(firstname);
+			driver.findElement(By.xpath("//input[@id='lastname']")).sendKeys(lastname);
+			driver.findElement(By.xpath("//input[@id='email_address']")).sendKeys(validEmail);
+			driver.findElement(By.xpath("//input[@id='password']")).sendKeys(validPassword);
+			driver.findElement(By.xpath("//input[@id='confirmation']")).sendKeys(validPassword);
+			driver.findElement(By.xpath("//button[@title='Register']")).click();
+			
+			Assert.assertTrue(driver.findElement(By.xpath("//li[@class='success-msg']//span[text()='Thank you for registering with Main Website Store.']")).isDisplayed());
+			
+			Assert.assertEquals(driver.findElement(By.xpath("//h1")).getText(), "MY DASHBOARD");
+			Assert.assertTrue(driver.findElement(By.xpath("//strong[text()='Hello, "+firstname+" "+lastname+"!']")).isDisplayed());
+			Assert.assertTrue(driver.findElement(By.xpath("//div[@class='box-content']/p[contains(text(),"+firstname+""+lastname+")]")).isDisplayed());
+			Assert.assertTrue(driver.findElement(By.xpath("//div[@class='box-content']/p[contains(.,'"+ validEmail + "')]")).isDisplayed());
+			//Assert.assertTrue(driver.findElement(By.xpath("//strong[text()='Hello, Automation Testing!']")).isDisplayed());
+			
+			driver.findElement(By.xpath("//a[@class='skip-link skip-account']//span[@class='label']")).click();
+			driver.findElement(By.xpath("//a[@title='Log Out']")).click();
 		
+		}
 		
 		@Test
 
-		public void TC_05_LoginWithValidEmailAndPassword() {
+		public void TC_06_LoginWithValidEmailAndPassword() {
 			driver.get("http://live.demoguru99.com/");
 			
 			driver.findElement(By.xpath("//div[@class='footer']//a[text()='My Account']")).click();
@@ -112,21 +144,14 @@ public class topic_03_Xpath_EX {
 			// cách 1 : dùng hàm assertTrue( điều kiện)--> locator dc hiển thị(isDisplayed)
 			// --> Dùng khi giá trị KO CỐ ĐỊNH, thay đổi
 			
-			Assert.assertTrue(driver.findElement(By.xpath("//strong[text()='Hello, Automation Testing!']")).isDisplayed());
+			Assert.assertTrue(driver.findElement(By.xpath("//strong[text()='Hello, "+firstname+" "+lastname+"!']")).isDisplayed());
 			Assert.assertTrue(driver.findElement(By.xpath("//div[@class='box-content']/p[contains(text(),"+firstname+""+lastname+")]")).isDisplayed());
-			Assert.assertTrue(driver.findElement(By.xpath("//div[@class='box-content']/p[contains(.,'"+ validEmail + "')]")).isDisplayed());
-			Assert.assertTrue(driver.findElement(By.xpath("//strong[text()='Hello, Automation Testing!']")).isDisplayed());
-
-			
-			
+			Assert.assertTrue(driver.findElement(By.xpath("//div[@class='box-content']/p[contains(.,'"+ validEmail + "')]")).isDisplayed());	
 			// cách 2 : dùng hàm assertEqual(điều kiện 1, điều kiện 2)-->gettext() --actual result,expected result
 			// --> Dùng khi giá trị CỐ ĐỊNH
 			Assert.assertEquals(driver.findElement(By.xpath("//h1")).getText(), "MY DASHBOARD");		
 		}
 		
-		
-		
-	
 		@AfterClass
 
 		public void afterClass() {
