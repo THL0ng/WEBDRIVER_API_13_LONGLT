@@ -38,7 +38,7 @@ public class topic_11_Window_TAB {
 
 		}
 
-	/*	@Test
+		@Test
 
 		public void TC_01_Windows() throws InterruptedException {
 			driver.get("https://automationfc.github.io/basic-form/index.html");
@@ -78,7 +78,7 @@ public class topic_11_Window_TAB {
 			
 			CloseAllWindowsWithoutParent(parentID); 
 	
-		} */
+		} 
 		
 		// SWITCH TO CHILD WINDOWS ( ONLY 2 WINDOWS )
 		public void switchToWindowsbyID (String parentID) {
@@ -186,9 +186,13 @@ public class topic_11_Window_TAB {
 			Thread.sleep(2000);
 			Assert.assertEquals(driver.getTitle(), "Kyna.vn - Học online cùng chuyên gia");
 			
-	/*		clickToElementByJS("//img[@alt='apple-app-icon']");
+	/*		// TRƯỜNG HỢP NÀY CẢ EXPECTD RESULT VÀ ACTUAL RESULT ĐỀU GIỐNG NHAU NHƯNG THẬT RA KHÁC VỀ KIỂU CHỮ ( DÙNG DIFFCHECKER CHECK SẼ THẤY )
+	 		// THẦY KIỂM TRA LẠI SAU
+			clickToElementByJS("//img[@alt='apple-app-icon']");
 			switchToWindowsbyTitle("‎KYNA on the App Store");
-			Assert.assertEquals(driver.getTitle(),"‎KYNA on the App Store");
+			String kynaAppTitle = driver.getTitle();
+			System.out.println(kynaAppTitle); 
+			Assert.assertEquals(kynaAppTitle,"KYNA on the App Store"); 
 			Thread.sleep(2000);
 			switchToWindowsbyTitle("Kyna.vn - Học online cùng chuyên gia");
 			Thread.sleep(2000);
@@ -229,14 +233,38 @@ public class topic_11_Window_TAB {
 
 		@Test
 
-		public void TC_03_Window_Tab3() {
+		public void TC_03_Window_Tab3() throws InterruptedException {
 			driver.get("http://live.demoguru99.com/index.php/");
-			
+						
 			driver.findElement(By.xpath("//a[text()='Mobile']")).click();
 			
 			driver.findElement(By.xpath("//a[@title='Xperia']//following-sibling::div[@class='product-info']//a[text()='Add to Compare']")).click();
+			Assert.assertTrue(driver.findElement(By.xpath("//span[text()='The product Sony Xperia has been added to comparison list.']")).isDisplayed());
 			
+			driver.findElement(By.xpath("//a[@title='Samsung Galaxy']//following-sibling::div[@class='product-info']//a[text()='Add to Compare']")).click();
+			Assert.assertTrue(driver.findElement(By.xpath("//span[text()='The product Samsung Galaxy has been added to comparison list.']")).isDisplayed());
 			
+			driver.findElement(By.xpath("//button[@title='Compare']")).click();
+			Thread.sleep(2000);
+			
+			switchToWindowsbyTitle("Products Comparison List - Magento Commerce");
+			Assert.assertTrue(driver.findElement(By.xpath("//img[@alt='Sony Xperia']")).isDisplayed());
+			Assert.assertTrue(driver.findElement(By.xpath("//img[@alt='Samsung Galaxy']")).isDisplayed());
+			
+			driver.findElement(By.xpath("//button[@class='button']")).click();
+			Thread.sleep(2000);
+
+			
+			switchToWindowsbyTitle("Mobile");
+	
+			driver.findElement(By.xpath("//a[text()='Clear All']")).click();
+			Thread.sleep(2000);
+
+			
+			driver.switchTo().alert().accept();
+			
+			Assert.assertTrue(driver.findElement(By.xpath("//span[text()='The comparison list was cleared.']")).isDisplayed());
+		
 		}
 
 		@AfterClass
