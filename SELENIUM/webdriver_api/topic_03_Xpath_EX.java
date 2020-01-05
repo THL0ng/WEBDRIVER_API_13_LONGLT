@@ -1,10 +1,6 @@
 package webdriver_api;
 
 import org.testng.annotations.Test;
-
-import static org.junit.Assert.assertArrayEquals;
-import static org.junit.Assert.assertEquals;
-
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 

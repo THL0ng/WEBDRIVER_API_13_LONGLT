@@ -25,10 +25,10 @@ public class topic_11_Window_TAB {
 		@BeforeClass
 
 		public void beforeClass() {
-			FirefoxProfile profile = new FirefoxProfile();
+			/*FirefoxProfile profile = new FirefoxProfile();
 			profile.setPreference("dom.webnotification.enabled" , false);
-			driver = new FirefoxDriver(profile);
-			//driver = new FirefoxDriver();
+			driver = new FirefoxDriver(profile);*/
+			driver = new FirefoxDriver();
 			driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 			driver.manage().window().maximize();
 			

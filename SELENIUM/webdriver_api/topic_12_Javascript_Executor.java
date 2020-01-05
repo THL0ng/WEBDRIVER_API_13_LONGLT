@@ -92,7 +92,7 @@ public class topic_12_Javascript_Executor {
 			highlightElement(("//a[text()='Samsung Galaxy']/parent::h2/following-sibling::div[@class='actions']//button"));
 			clickToElementByJS(("//a[text()='Samsung Galaxy']/parent::h2/following-sibling::div[@class='actions']//button"));
 			
-			String pageInnerText = (String) executeForBrowser("return document.documentElement.inerText;");
+			String pageInnerText = (String) executeForBrowser("return document.documentElement.innerText;");
 			Assert.assertTrue(pageInnerText.contains("Samsung Galaxy was added to your shopping cart."));
 			
 			highlightElement(("//a[text()='Customer Service']"));
