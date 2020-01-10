@@ -109,7 +109,8 @@ public class topic_13_UpLoadFile {
 				
 			
 			find("//table//button[@class='btn btn-primary start']").click();
-			Thread.sleep(2000);
+			Thread.sleep(3000);
+		
 			
 			Assert.assertTrue(find("//p[@class='name']//a[@title='pic1.jpg']").isDisplayed());
 			
@@ -149,10 +150,6 @@ public class topic_13_UpLoadFile {
 			robot.keyPress(KeyEvent.VK_ENTER);
 			robot.keyRelease(KeyEvent.VK_ENTER);
 			Thread.sleep(2000);
-
-
-			
-			
 			
 		}
 
