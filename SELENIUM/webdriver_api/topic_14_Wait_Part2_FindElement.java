@@ -78,8 +78,7 @@ public class topic_14_Wait_Part2_FindElement {
 			Assert.assertFalse(elements.isEmpty());
 			Assert.assertEquals(elements.size(), 4);
 			
-			
-			
+		
 		}
 
 		@Test
