@@ -67,7 +67,7 @@ public class topic_14_Wait_Part5_Mixing {
 			//IMPLICIT WAIT(findElement/findElements)
 			driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 			
-			driver.get("http://demo.guru99.com/");
+			driver.get("c");
 			
 		
 			
