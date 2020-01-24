@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="Selenium WebDriver API" parallel="tests" thread-count = "2">
+
+
+<test name="Run testcase on FIREFOX">
+  <parameter name="browser" value="firefox"></parameter>
+    <classes>
+      <class name="TestNG_Framework.Part5_Parameter"/>     
+    </classes>
+  </test>
+  
+  
+  
+  <test name="Run testcase on CHROME">
+  	<parameter name="browser" value="chrome"></parameter>
+    <classes>
+      <class name="TestNG_Framework.Part5_Parameter"/>     
+    </classes>
+  </test>
+
+</suite> 
